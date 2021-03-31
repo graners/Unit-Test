@@ -34,5 +34,16 @@ namespace BankTests
             // Act and assert
             Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
         }
+
+        public void Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange()
+        {
+            // Arrange
+            double beginningBalance = 11.99;
+            double debitAmount = 20.99;
+            BankAccount account = new BankAccount("Mrs. Teresa Silva", beginningBalance);
+
+            // Act and assert
+            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
+        }
     }
 }
