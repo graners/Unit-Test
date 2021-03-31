@@ -31,8 +31,17 @@ namespace BankTests
             double debitAmount = -100.00;
             BankAccount account = new BankAccount("Mr. Joao Silva", beginningBalance);
 
-            // Act and assert
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
+            // Act
+            //Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
+            try
+            {
+                account.Debit(debitAmount);
+            }
+            catch (System.ArgumentOutOfRangeException e)
+            {
+                // Assert
+                StringAssert.Contains(e.Message, BankAccount.DebitAmountLessThanZeroMessage);
+            }
         }
 
         public void Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange()
@@ -42,8 +51,17 @@ namespace BankTests
             double debitAmount = 20.99;
             BankAccount account = new BankAccount("Mrs. Teresa Silva", beginningBalance);
 
-            // Act and assert
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
+            // Act
+            //Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
+            try
+            {
+                account.Debit(debitAmount);
+            }
+            catch (System.ArgumentOutOfRangeException e)
+            {
+                // Assert
+                StringAssert.Contains(e.Message, BankAccount.DebitAmountExceedsBalanceMessage);
+            }
         }
     }
 }
